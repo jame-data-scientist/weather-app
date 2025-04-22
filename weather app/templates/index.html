@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Analyzer</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Weather Report Tool</h2>
+    <form method="POST">
+        <label>Choose an option:</label>
+        <select name="option" required>
+            <option value="1">Dew Point</option>
+            <option value="2">Relative Humidity</option>
+            <option value="3">Weather Report</option>
+            <option value="4">All</option>
+        </select>
+        
+        <label>Dry Bulb Temperature (°C):</label>
+        <input type="number" step="any" name="temp_dry" required>
+
+        <label>Wet Bulb Temperature (°C):</label>
+        <input type="number" step="any" name="temp_wet" required>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if result %}
+        <h3>Results:</h3>
+        <ul>
+            {% for key, value in result.items() %}
+                <li><strong>{{ key.replace('_', ' ').capitalize() }}:</strong> {{ value }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
